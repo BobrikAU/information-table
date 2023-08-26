@@ -1,0 +1,22 @@
+@mixin for-font($weight, $fontType) {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: swap;
+  font-weight: $weight;
+  src: local("Inter"), local("inter"), local("INTER"),
+    url("./Inter-#{$fontType}.woff2") format("woff2"),
+    url("./Inter-#{$fontType}.woff") format("woff"),
+    url("./Inter-#{$fontType}.otf") format("eot");
+}
+
+@font-face {
+  @include for-font($weight: 400, $fontType: "Regular");
+}
+
+@font-face {
+  @include for-font($weight: 500, $fontType: "Medium");
+}
+
+@font-face {
+  @include for-font($weight: 600, $fontType: "SemiBold");
+}
