@@ -3,6 +3,8 @@
 
 .table {
   width: 100%;
+  height: calc(100% - 64px);
+  overflow-y: scroll;
   border-collapse: collapse;
   background-color: map-get($color, white);
   display: grid;
@@ -39,6 +41,12 @@
   &:last-child {
     padding-right: 50px;
   }
+}
+
+.thSpan {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .tbody {

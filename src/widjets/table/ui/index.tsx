@@ -1,33 +1,47 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { nanoid } from "nanoid";
 import styles from "./index.module.scss";
+import { SortingIcon } from "../../../shared/icons";
 
 interface ITableProps {
-  externaleStyles?: string;
-  getDataReqest: () => Promise<
-    | {
-        [name: string]: string | object | string[];
-      }[]
-    | undefined
-  >;
+  arrayWithContent: { [name: string]: string | Array<string> | object }[];
 }
 
-const Table = ({ getDataReqest, externaleStyles }: ITableProps) => {
-  // данные для отрисовки таблицы
-  const [arrayWithContent, setArrayWithContent] = useState<
-    { [name: string]: string | Array<string> | object }[]
-  >([{}]);
+const Table = ({ arrayWithContent }: ITableProps) => {
+  const [sortingCriteria, setSortingCriteria] = useState<string[]>([
+    "id",
+    "desc",
+  ]);
 
-  //получаем данные для построения таблицы
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getDataReqest();
-      if (data) {
-        setArrayWithContent(data);
+  // данные для отрисовки таблицы с их сортировкой
+  const newArray = arrayWithContent
+    .map((itemObject) => {
+      for (let key in itemObject) {
+        const value = itemObject[key];
+        if (Array.isArray(value)) {
+          itemObject[key] = value.join(", ");
+        } else if (value instanceof Object) {
+          if ("name" in value && typeof value.name === "string") {
+            itemObject[key] = value.name;
+          } else {
+            itemObject[key] = JSON.stringify(value);
+          }
+        }
       }
-    };
-    getData();
-  }, []);
+      return itemObject;
+    })
+    .sort((a, b) => {
+      if (typeof a === "string" && typeof b === "string") {
+        if (a[sortingCriteria[0]] > b[sortingCriteria[0]])
+          return sortingCriteria[1] === "asc" ? 1 : -1;
+        if (a[sortingCriteria[0]] === b[sortingCriteria[0]]) return 0;
+        return sortingCriteria[1] === "asc" ? -1 : 1;
+      }
+      if (a[sortingCriteria[0]] < b[sortingCriteria[0]])
+        return sortingCriteria[1] === "asc" ? 1 : -1;
+      if (a[sortingCriteria[0]] === b[sortingCriteria[0]]) return 0;
+      return sortingCriteria[1] === "asc" ? -1 : 1;
+    });
 
   // определяем количество колонок в таблице и наимения занлавий колонок, делаем строку с
   // заголовками
@@ -40,12 +54,46 @@ const Table = ({ getDataReqest, externaleStyles }: ITableProps) => {
     "--numberOfColumns",
     `${namesInTableHeader.length}`
   );
+
+  const bbb = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const text = e.currentTarget.textContent;
+    if (text && text !== sortingCriteria[0]) {
+      setSortingCriteria([text, "desc"]);
+    } else if (
+      text &&
+      text === sortingCriteria[0] &&
+      sortingCriteria[1] === "asc"
+    ) {
+      setSortingCriteria([text, "desc"]);
+    } else if (
+      text &&
+      text === sortingCriteria[0] &&
+      sortingCriteria[1] === "desc"
+    ) {
+      setSortingCriteria([text, "asc"]);
+    }
+  };
+
   const thead = (
     <tr className={styles.trInThead}>
       {namesInTableHeader.map((item) => {
         return (
           <th className={styles.th} key={nanoid()}>
-            {item}
+            <span className={styles.thSpan} onClick={(e) => bbb(e)}>
+              {item}
+              <SortingIcon
+                colorUp={
+                  sortingCriteria[0] === item && sortingCriteria[1] === "desc"
+                    ? "black"
+                    : "grey"
+                }
+                colorDown={
+                  sortingCriteria[0] === item && sortingCriteria[1] === "asc"
+                    ? "black"
+                    : "grey"
+                }
+              />
+            </span>
           </th>
         );
       })}
@@ -54,26 +102,22 @@ const Table = ({ getDataReqest, externaleStyles }: ITableProps) => {
 
   // создаем строки таблицы
   const getTableBody = () => {
-    //фомируем набор строк
-    return arrayWithContent.map((itemObject) => {
+    return newArray.map((itemObject) => {
       // формируем конкретную строку
       const rowCells = namesInTableHeader.map((item) => {
         let value = itemObject[item];
-        if (Array.isArray(value)) {
-          value = value.join(", ");
+        if (typeof value === "number") {
+          value = String(value);
         }
-        if (value instanceof Object) {
-          if ("name" in value && typeof value.name === "string") {
-            value = value.name;
-          } else {
-            value = JSON.stringify(value);
-          }
+        if (typeof value === "string") {
+          return (
+            <td key={nanoid()} className={styles.td}>
+              {value}
+            </td>
+          );
+        } else {
+          return "";
         }
-        return (
-          <td key={nanoid()} className={styles.td}>
-            {value}
-          </td>
-        );
       });
       return (
         <tr key={nanoid()} className={styles.trInBody}>
