@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { BASE_URL } from "../index";
 
 axios.defaults.baseURL = BASE_URL;
@@ -35,7 +35,6 @@ export const getCharacter = async (): Promise<
 > => {
   try {
     const response = await axios.get(`/character`);
-    console.log(response.data.results);
     return response.data.results;
   } catch (error) {
     handleErrors(error);

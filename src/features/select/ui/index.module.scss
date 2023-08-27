@@ -64,6 +64,7 @@
   left: 0;
   top: 18px;
   transition: height 0.3s, visibility 0.3s, opacity 0.3s;
+  z-index: 3;
 }
 
 .selectList_open {

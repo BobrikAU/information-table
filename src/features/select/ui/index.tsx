@@ -26,7 +26,9 @@ const Select = ({
   };
   // закрытие выпадающего спика при клике по значению выпадающего списка и текущему значению селекта
   const handleClickLabel = () => {
-    setIsSelectOpen(false);
+    setTimeout(() => {
+      setIsSelectOpen(false);
+    });
   };
   const handleClickCurrentValue = () => {
     setIsSelectOpen(!isSelectOpen);
@@ -38,14 +40,16 @@ const Select = ({
         onClick={handleClickLabel}
         className={styles.selectList__label}
         key={nanoid()}
+        htmlFor={value}
       >
         {value}
         <input
           name="singleChoice"
           type="radio"
           value={value}
+          id={value}
           checked={currentValue === value}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           className={styles.selectList__input}
         />
       </label>
