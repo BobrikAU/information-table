@@ -19,19 +19,24 @@ const handleErrors = (error: unknown) => {
   }
 };
 
-export const getLocation = async () => {
+export const getLocation = async (): Promise<
+  { [name: string]: string | Array<string> | object }[] | undefined
+> => {
   try {
     const response = await axios.get(`/location`);
-    console.log(response.data.results);
+    return response.data.results;
   } catch (error) {
     handleErrors(error);
   }
 };
 
-export const getCharacter = async () => {
+export const getCharacter = async (): Promise<
+  { [name: string]: string | Array<string> | object }[] | undefined
+> => {
   try {
     const response = await axios.get(`/character`);
     console.log(response.data.results);
+    return response.data.results;
   } catch (error) {
     handleErrors(error);
   }
