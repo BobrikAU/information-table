@@ -1,23 +1,16 @@
 import styles from "./index.module.scss";
 import { SetContent, SetNumberRowsPerPage } from "../../../features/select";
 import { Filter } from "../../../features/filter";
+import { TContent } from "../../../app/types/types";
 
 interface IHeaderProps {
   typeOfContent: string;
   setTypeOfContent: React.Dispatch<React.SetStateAction<string>>;
   numberRowsPerPage: string;
   changeNumberRowsPerPage: React.Dispatch<React.SetStateAction<string>>;
-  searchWord: string;
-  setSearchWord: React.Dispatch<React.SetStateAction<string>>;
   sortingThead: string;
-  arrayWithContent: { [name: string]: string | Array<string> | object }[];
-  setFiteredArrayWithContent: React.Dispatch<
-    React.SetStateAction<
-      {
-        [name: string]: string | object | string[];
-      }[]
-    >
-  >;
+  arrayWithContent: TContent;
+  setFiteredArrayWithContent: React.Dispatch<React.SetStateAction<TContent>>;
 }
 
 const Header = ({
@@ -25,8 +18,6 @@ const Header = ({
   setTypeOfContent,
   numberRowsPerPage,
   changeNumberRowsPerPage,
-  searchWord,
-  setSearchWord,
   sortingThead,
   arrayWithContent,
   setFiteredArrayWithContent,
@@ -38,8 +29,6 @@ const Header = ({
         changeCurrentValue={setTypeOfContent}
       />
       <Filter
-        value={searchWord}
-        setValue={setSearchWord}
         sortingThead={sortingThead}
         arrayWithContent={arrayWithContent}
         setFiteredArrayWithContent={setFiteredArrayWithContent}

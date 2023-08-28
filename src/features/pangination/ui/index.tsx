@@ -46,7 +46,7 @@ const Pangination = ({
     });
   }, [startRow, endRow, setIndexesOfConten]);
 
-  // обработка нажатий на кнопкт пролистывания страниц
+  // обработка нажатий на кнопки пролистывания страниц
   const getNextPage = () => {
     setCurrentPage(currentPage + 1);
   };

@@ -3,14 +3,12 @@ import { nanoid } from "nanoid";
 import styles from "./index.module.scss";
 import { SortingIcon } from "../../../shared/icons";
 import { Pangination } from "../../../features/pangination";
+import { TContent } from "../../../app/types/types";
 
 interface ITableProps {
-  arrayWithContent: { [name: string]: string | Array<string> | object }[];
-  filteredArrayWithContent: {
-    [name: string]: string | Array<string> | object;
-  }[];
+  arrayWithContent: TContent;
+  filteredArrayWithContent: TContent;
   numberRowsPerPage: number;
-  searchWord: string;
   setSortingThead: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -18,19 +16,20 @@ const Table = ({
   arrayWithContent,
   filteredArrayWithContent,
   numberRowsPerPage,
-  searchWord,
   setSortingThead,
 }: ITableProps) => {
+  // критерии сортировки
   const [sortingCriteria, setSortingCriteria] = useState<string[]>([
     "id",
     "desc",
   ]);
+  // индексы строк для показа, определенные при пангинации
   const [indexesOfRowsToShow, setIndexesOfRowsToShow] = useState({
     startIndex: 0,
     endIndex: filteredArrayWithContent.length,
   });
 
-  // прокрутка таблицы в начало при пролистывании
+  // прокрутка таблицы в начало при пролистывании страниц таблицы
   const refTable = useRef<HTMLTableElement>(null);
   refTable.current?.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
@@ -52,6 +51,7 @@ const Table = ({
       return itemObject;
     });
   }, [filteredArrayWithContent]);
+
   // сортировка данных
   useMemo(() => {
     newArray.sort((a, b) => {
@@ -67,18 +67,6 @@ const Table = ({
       return sortingCriteria[1] === "asc" ? -1 : 1;
     });
   }, [newArray, sortingCriteria]);
-
-  // // фильтрация данных по поисковому слову
-  // const filteredNewArray = useMemo(() => {
-  //   return newArray.filter((item) => {
-  //     const key = sortingCriteria[0];
-  //     let value = item[key];
-  //     if (typeof value === "string") {
-  //       value = value.toLowerCase();
-  //       return value.includes(searchWord.toLowerCase());
-  //     }
-  //   });
-  // }, [newArray, sortingCriteria, searchWord]);
 
   // определение названий заголовков и количество колонок в таблице
   const namesInTableHeader = Object.keys(arrayWithContent[0]);
