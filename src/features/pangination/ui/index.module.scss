@@ -1,0 +1,31 @@
+@import "../../../app/styles/vatiables/index.scss";
+@import "../../../app/styles/mixins/index.scss";
+
+.pangination {
+  min-height: 44px;
+  width: 100%;
+  background-color: map-get($color, blue_light);
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 0 50px;
+}
+
+.infoAboutRows,
+.pagesNumber {
+  @include fontOption($size: 12px, $weight: 500, $height: 18px);
+  letter-spacing: 0.36px;
+  color: map-get($color, grey_500);
+}
+
+.pagesCounter {
+  display: flex;
+  align-items: center;
+}
+
+.pagesNumber {
+  padding: 0 10px;
+  width: 25px;
+  text-align: center;
+}

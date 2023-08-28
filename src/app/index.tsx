@@ -10,7 +10,9 @@ function App() {
   const [arrayWithContent, setArrayWithContent] = useState<
     { [name: string]: string | Array<string> | object }[]
   >([{}]);
+  const [numberRowsPerPage, setNumberRowsPerPage] = useState("15");
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   //получаем данные для построения таблицы
   const getDataReqest =
     typeOfContent === "Location" ? getLocation : getCharacter;
@@ -35,8 +37,13 @@ function App() {
           <Header
             typeOfContent={typeOfContent}
             setTypeOfContent={setTypeOfContent}
+            numberRowsPerPage={numberRowsPerPage}
+            changeNumberRowsPerPage={setNumberRowsPerPage}
           />
-          <Table arrayWithContent={arrayWithContent} />
+          <Table
+            arrayWithContent={arrayWithContent}
+            numberRowsPerPage={+numberRowsPerPage}
+          />
         </>
       )}
     </div>
