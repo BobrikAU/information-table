@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { nanoid } from "nanoid";
 import styles from "./index.module.scss";
 import { SortingIcon } from "../../../shared/icons";
@@ -13,9 +13,9 @@ const Table = ({ arrayWithContent }: ITableProps) => {
     "desc",
   ]);
 
-  // данные для отрисовки таблицы с их сортировкой
-  const newArray = arrayWithContent
-    .map((itemObject) => {
+  // переработка данных для отрисовки таблицы с их сортировкой
+  const newArray = useMemo(() => {
+    return arrayWithContent.map((itemObject) => {
       for (let key in itemObject) {
         const value = itemObject[key];
         if (Array.isArray(value)) {
@@ -29,8 +29,10 @@ const Table = ({ arrayWithContent }: ITableProps) => {
         }
       }
       return itemObject;
-    })
-    .sort((a, b) => {
+    });
+  }, [arrayWithContent]);
+  useMemo(() => {
+    newArray.sort((a, b) => {
       if (typeof a === "string" && typeof b === "string") {
         if (a[sortingCriteria[0]] > b[sortingCriteria[0]])
           return sortingCriteria[1] === "asc" ? 1 : -1;
@@ -42,6 +44,7 @@ const Table = ({ arrayWithContent }: ITableProps) => {
       if (a[sortingCriteria[0]] === b[sortingCriteria[0]]) return 0;
       return sortingCriteria[1] === "asc" ? -1 : 1;
     });
+  }, [newArray, sortingCriteria]);
 
   // определяем количество колонок в таблице и наимения занлавий колонок, делаем строку с
   // заголовками
@@ -55,7 +58,8 @@ const Table = ({ arrayWithContent }: ITableProps) => {
     `${namesInTableHeader.length}`
   );
 
-  const bbb = (e: React.MouseEvent<HTMLSpanElement>) => {
+  // обработка клика на заголовке таблицы для определения критериев сортировки данных
+  const handleClickThSpan = (e: React.MouseEvent<HTMLSpanElement>) => {
     const text = e.currentTarget.textContent;
     if (text && text !== sortingCriteria[0]) {
       setSortingCriteria([text, "desc"]);
@@ -74,12 +78,16 @@ const Table = ({ arrayWithContent }: ITableProps) => {
     }
   };
 
+  // создаем строку заголовков
   const thead = (
     <tr className={styles.trInThead}>
       {namesInTableHeader.map((item) => {
         return (
           <th className={styles.th} key={nanoid()}>
-            <span className={styles.thSpan} onClick={(e) => bbb(e)}>
+            <span
+              className={styles.thSpan}
+              onClick={(e) => handleClickThSpan(e)}
+            >
               {item}
               <SortingIcon
                 colorUp={
