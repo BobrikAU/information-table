@@ -21,16 +21,21 @@ const Pangination = ({
   const [currentPage, setCurrentPage] = useState(1);
 
   // автоматическое переключение на первую страницу при изменении количества строк на странице
-  const oldValueRowsOnPage = useRef<number>(rowsOnPage);
+  // и общего количества строк из-за фильтрации
+  const oldValueRowsOnPage = useRef([rowsOnPage, rows]);
   setTimeout(() => {
-    if (oldValueRowsOnPage.current !== rowsOnPage) {
-      oldValueRowsOnPage.current = rowsOnPage;
+    if (
+      oldValueRowsOnPage.current[0] !== rowsOnPage ||
+      oldValueRowsOnPage.current[1] !== rows
+    ) {
+      oldValueRowsOnPage.current[0] = rowsOnPage;
+      oldValueRowsOnPage.current[1] = rows;
       setCurrentPage(1);
     }
   });
 
   // определение данных для пангилации
-  const startRow = (currentPage - 1) * rowsOnPage + 1;
+  const startRow = rows > 0 ? (currentPage - 1) * rowsOnPage + 1 : 0;
   const endRow =
     currentPage * rowsOnPage < rows ? currentPage * rowsOnPage : rows;
   const pages = Math.ceil(rows / rowsOnPage);

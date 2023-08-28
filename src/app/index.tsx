@@ -12,6 +12,11 @@ function App() {
   >([{}]);
   const [numberRowsPerPage, setNumberRowsPerPage] = useState("15");
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [searchWord, setSearchWord] = useState("");
+  const [sortingThead, setSortingThead] = useState("id");
+  const [fiteredArrayWithContent, setFiteredArrayWithContent] = useState<
+    { [name: string]: string | Array<string> | object }[]
+  >([{}]);
 
   //получаем данные для построения таблицы
   const getDataReqest =
@@ -39,10 +44,18 @@ function App() {
             setTypeOfContent={setTypeOfContent}
             numberRowsPerPage={numberRowsPerPage}
             changeNumberRowsPerPage={setNumberRowsPerPage}
+            searchWord={searchWord}
+            setSearchWord={setSearchWord}
+            sortingThead={sortingThead}
+            arrayWithContent={arrayWithContent}
+            setFiteredArrayWithContent={setFiteredArrayWithContent}
           />
           <Table
             arrayWithContent={arrayWithContent}
+            filteredArrayWithContent={fiteredArrayWithContent}
             numberRowsPerPage={+numberRowsPerPage}
+            searchWord={searchWord}
+            setSortingThead={setSortingThead}
           />
         </>
       )}
