@@ -19,11 +19,13 @@ const Select = ({
   changeCurrentValue,
 }: ISelectProps) => {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
+
   // обработка выбора из выпадающего списка
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     changeCurrentValue(value);
   };
+
   // закрытие выпадающего спика при клике по значению выпадающего списка и текущему значению селекта
   const handleClickLabel = () => {
     setTimeout(() => {
@@ -33,6 +35,7 @@ const Select = ({
   const handleClickCurrentValue = () => {
     setIsSelectOpen(!isSelectOpen);
   };
+
   // формирование выпадающего списка
   const selectList = possibleValues.map((value) => {
     let option = (
@@ -56,12 +59,14 @@ const Select = ({
     );
     return option;
   });
+
   // определение высоты выпадающего списка и передача его в css для нормальной работы анимации
   // открытия и закрытия выпадающего списка
   document.documentElement.style.setProperty(
     "--selectListHeight",
     `${28 * selectList.length}px`
   );
+
   return (
     <div className={styles.blockSelect}>
       <span className={styles.description}>{description}</span>

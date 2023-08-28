@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import { Header } from "../widjets/header";
 import { Table } from "../widjets/table";
 import { getLocation, getCharacter } from "../shared/api";
 import { Spinner } from "../shared/icons";
+import { TContent } from "./types/types";
 
 function App() {
+  // вид загружаемых данных, выбранных пользователем
   const [typeOfContent, setTypeOfContent] = useState("Location");
-  const [arrayWithContent, setArrayWithContent] = useState<
-    { [name: string]: string | Array<string> | object }[]
-  >([{}]);
+  // загруженные данные в первоначальном виде
+  const [arrayWithContent, setArrayWithContent] = useState<TContent>([{}]);
   const [numberRowsPerPage, setNumberRowsPerPage] = useState("15");
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [searchWord, setSearchWord] = useState("");
+  // наименование заголовка в таблице, по которому идет сортировка и фильтрация
   const [sortingThead, setSortingThead] = useState("id");
-  const [fiteredArrayWithContent, setFiteredArrayWithContent] = useState<
-    { [name: string]: string | Array<string> | object }[]
-  >([{}]);
+  // отфильтрованные данные
+  const [fiteredArrayWithContent, setFiteredArrayWithContent] =
+    useState<TContent>([{}]);
 
   //получаем данные для построения таблицы
   const getDataReqest =
@@ -44,8 +45,6 @@ function App() {
             setTypeOfContent={setTypeOfContent}
             numberRowsPerPage={numberRowsPerPage}
             changeNumberRowsPerPage={setNumberRowsPerPage}
-            searchWord={searchWord}
-            setSearchWord={setSearchWord}
             sortingThead={sortingThead}
             arrayWithContent={arrayWithContent}
             setFiteredArrayWithContent={setFiteredArrayWithContent}
@@ -54,7 +53,6 @@ function App() {
             arrayWithContent={arrayWithContent}
             filteredArrayWithContent={fiteredArrayWithContent}
             numberRowsPerPage={+numberRowsPerPage}
-            searchWord={searchWord}
             setSortingThead={setSortingThead}
           />
         </>

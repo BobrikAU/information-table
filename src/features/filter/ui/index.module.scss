@@ -33,3 +33,7 @@
   letter-spacing: 0.36px;
   color: map-get($color, grey_500);
 }
+
+.label__span {
+  text-transform: uppercase;
+}
