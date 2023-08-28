@@ -6,17 +6,28 @@ import { Pangination } from "../../../features/pangination";
 
 interface ITableProps {
   arrayWithContent: { [name: string]: string | Array<string> | object }[];
+  filteredArrayWithContent: {
+    [name: string]: string | Array<string> | object;
+  }[];
   numberRowsPerPage: number;
+  searchWord: string;
+  setSortingThead: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Table = ({ arrayWithContent, numberRowsPerPage }: ITableProps) => {
+const Table = ({
+  arrayWithContent,
+  filteredArrayWithContent,
+  numberRowsPerPage,
+  searchWord,
+  setSortingThead,
+}: ITableProps) => {
   const [sortingCriteria, setSortingCriteria] = useState<string[]>([
     "id",
     "desc",
   ]);
   const [indexesOfRowsToShow, setIndexesOfRowsToShow] = useState({
     startIndex: 0,
-    endIndex: arrayWithContent.length,
+    endIndex: filteredArrayWithContent.length,
   });
 
   // прокрутка таблицы в начало при пролистывании
@@ -25,7 +36,7 @@ const Table = ({ arrayWithContent, numberRowsPerPage }: ITableProps) => {
 
   // переработка данных для отрисовки таблицы
   const newArray = useMemo(() => {
-    return arrayWithContent.map((itemObject) => {
+    return filteredArrayWithContent.map((itemObject) => {
       for (let key in itemObject) {
         const value = itemObject[key];
         if (Array.isArray(value)) {
@@ -40,7 +51,7 @@ const Table = ({ arrayWithContent, numberRowsPerPage }: ITableProps) => {
       }
       return itemObject;
     });
-  }, [arrayWithContent]);
+  }, [filteredArrayWithContent]);
   // сортировка данных
   useMemo(() => {
     newArray.sort((a, b) => {
@@ -57,6 +68,19 @@ const Table = ({ arrayWithContent, numberRowsPerPage }: ITableProps) => {
     });
   }, [newArray, sortingCriteria]);
 
+  // // фильтрация данных по поисковому слову
+  // const filteredNewArray = useMemo(() => {
+  //   return newArray.filter((item) => {
+  //     const key = sortingCriteria[0];
+  //     let value = item[key];
+  //     if (typeof value === "string") {
+  //       value = value.toLowerCase();
+  //       return value.includes(searchWord.toLowerCase());
+  //     }
+  //   });
+  // }, [newArray, sortingCriteria, searchWord]);
+
+  // определение названий заголовков и количество колонок в таблице
   const namesInTableHeader = Object.keys(arrayWithContent[0]);
   document.documentElement.style.setProperty(
     "--numberOfColumns",
@@ -74,6 +98,7 @@ const Table = ({ arrayWithContent, numberRowsPerPage }: ITableProps) => {
     const text = e.currentTarget.textContent;
     if (text && text !== sortingCriteria[0]) {
       setSortingCriteria([text, "desc"]);
+      setSortingThead(text);
     } else if (
       text &&
       text === sortingCriteria[0] &&
@@ -154,7 +179,7 @@ const Table = ({ arrayWithContent, numberRowsPerPage }: ITableProps) => {
       </table>
       <Pangination
         rowsOnPage={numberRowsPerPage}
-        rows={arrayWithContent.length}
+        rows={newArray.length}
         setIndexesOfConten={setIndexesOfRowsToShow}
       />
     </>
