@@ -1,0 +1,11 @@
+@import "../../../app/styles/vatiables/index.scss";
+
+.header {
+  min-height: 64px;
+  background-color: map-get($color, blue_light);
+  box-sizing: border-box;
+  padding: 15px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

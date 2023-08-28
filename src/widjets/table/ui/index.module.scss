@@ -1,0 +1,75 @@
+@import "../../../app/styles/mixins/index.scss";
+@import "../../../app/styles/vatiables/index.scss";
+
+.table {
+  width: 100%;
+  height: calc(100% - 108px);
+  overflow-y: scroll;
+  border-collapse: collapse;
+  background-color: map-get($color, white);
+  display: grid;
+  grid-template-columns: repeat(
+    var(--numberOfColumns),
+    minmax(min-content, max-content)
+  );
+  grid-auto-rows: min-content;
+}
+
+.thead {
+  display: contents;
+  position: fixed;
+}
+
+.trInThead {
+  display: contents;
+}
+
+.th {
+  text-transform: uppercase;
+  @include fontOption($size: 11px, $weight: 600, $height: 16px);
+  letter-spacing: 0.44px;
+  color: map-get($color, grey_700);
+  text-align: start;
+  height: 40px;
+  background-color: map-get($color, blue_light);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  padding: 0 5px;
+  &:first-child {
+    padding-left: 10px;
+  }
+  &:last-child {
+    padding-right: 50px;
+  }
+}
+
+.thSpan {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.tbody {
+  display: contents;
+}
+
+.trInBody {
+  display: contents;
+}
+
+.td {
+  color: map-get($color, grey_700);
+  @include fontOption($size: 14px, $weight: 400, $height: 20px);
+  padding: 12px 5px;
+  &:first-child {
+    padding-left: 10px;
+  }
+  &:last-child {
+    padding-right: 50px;
+  }
+  .trInBody:nth-child(even) & {
+    background-color: map-get($color, additional);
+  }
+}

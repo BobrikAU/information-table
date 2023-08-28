@@ -1,50 +1,30 @@
-# information-table
+# Информационная таблица
 
-Таблица для вывода массива на экран
+Целью данного проекта было выполнение тестового задания.
 
-# Getting Started with Create React App
+В рамках тестового задания было разработано Web-приложение, принимающее различные массивы объектов,
+и представляющее информацию в виде таблицы. Ключи объектов массива должны были стать заголовками колонок. Таблица должна быть реализована с помощью CSS Grid или CSS Flex.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Помимо этого работающее приложение должно обеспечивать пангинацию и сортировку данных по возрастанию и по убыванию (реализована сортировка по каждой из колонок). Загружаемый контент должен выбираться пользователем.
 
-## Available Scripts
+На время загрузки контента на весь экран должен выводиться показатель закгрузки.
 
-In the project directory, you can run:
+## Использованные тежнологии
 
-### `npm start`
+Набор технологий определен составителем тестового задания: React JS, TypeScript, SCSS, Axios.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Доступные скрипты
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- `npm start` запуск локального сервера для разработки
 
-### `npm test`
+- `npm run build` сборка приложения для его дальнейшего размещения
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Планы по доработке
 
-### `npm run build`
+Не совсем внимательно читал тестовое задание и упустил, что возможно использование стейт менеджера по собственному выбору. Использование стейт менеджера сделало бы код читабельнее.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Не успел выполнить пункт задания о том, что при наборе слова в поле фильтрации под ним должны выпадать возможные варианты. Необходимо доработать данный момент.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+При работе была предпринята попытка реализовать FSD-архитектуру. Однако это реализовано не до конца в части распределения кода по сегментам. Кроме того код в слое app/index.tsx в значительной степени следовало расположить в слое Page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+В работе использованы средства и приемы, которые не совсем положительно оцениваются в сообществе: при построении таблицы использован 'display: contents' (проблема со скринридерами), вместо селекта с целью стилизации использован массим radio-кнопок с элементами label (исключены возможность фокусирования с помощью Tab). Посмотреть, возможны ли другие варианты.

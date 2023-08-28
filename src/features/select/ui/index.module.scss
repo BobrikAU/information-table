@@ -1,0 +1,97 @@
+@import "../../../app/styles/mixins/index.scss";
+@import "../../../app/styles/vatiables/index.scss";
+
+.blockSelect {
+  display: flex;
+  align-items: center;
+}
+
+.description {
+  @include fontOption($size: 12px, $weight: 500, $height: 18px);
+  letter-spacing: 0.36px;
+  color: map-get($color, grey_500);
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.currentValue {
+  padding-top: 2px;
+  padding: 0 7px;
+  min-width: 34px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.currentValue__span {
+  @include fontOption($size: 12px, $weight: 500, $height: 14px);
+  letter-spacing: 0.36px;
+  color: map-get($color, grey_500);
+  min-width: 14px;
+  text-align: end;
+}
+
+.currentValue__arrow {
+  transform: rotateZ(0deg);
+  transition: transform 0.3s;
+}
+
+.currentValue__arrow_rotated {
+  transform: rotateZ(180deg);
+}
+
+.selectList {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: map-get($color, white);
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.08),
+    0px 15px 35px -5px rgba(17, 24, 38, 0.2),
+    0px 0px 0px 1px rgba(152, 161, 178, 0.1);
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 18px;
+  transition: height 0.3s, visibility 0.3s, opacity 0.3s;
+  z-index: 3;
+}
+
+.selectList_open {
+  height: var(--selectListHeight);
+  visibility: visible;
+  opacity: 1;
+}
+
+.selectList__label {
+  @include fontOption($size: 14px, $weight: 500, $height: 20px);
+  letter-spacing: 0.28px;
+  color: map-get($color, grey_700);
+  min-width: 20px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s, color 0.2s;
+  &:hover {
+    background-color: map-get($color, blue_500);
+    color: map-get($color, white);
+    cursor: pointer;
+  }
+}
+
+.selectList__input {
+  display: none;
+}
