@@ -13,7 +13,7 @@ const SetNumberRowsPerPage = ({
     name="numberRows"
     description="Rows per page:"
     currentValue={currentValue}
-    possibleValues={["5", "10", "15", "20", "30", "40", "50"]}
+    possibleValues={["3", "5", "7", "10", "15", "20", "30"]}
     changeCurrentValue={changeCurrentValue}
   />
 );

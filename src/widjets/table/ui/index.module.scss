@@ -3,7 +3,7 @@
 
 .table {
   width: 100%;
-  height: calc(100% - 64px);
+  height: calc(100% - 108px);
   overflow-y: scroll;
   border-collapse: collapse;
   background-color: map-get($color, white);
@@ -12,6 +12,7 @@
     var(--numberOfColumns),
     minmax(min-content, max-content)
   );
+  grid-auto-rows: min-content;
 }
 
 .thead {
@@ -35,6 +36,7 @@
   align-items: center;
   position: sticky;
   top: 0;
+  padding: 0 5px;
   &:first-child {
     padding-left: 10px;
   }
