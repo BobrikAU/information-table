@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/information-table/static/css/main.74942391.css",
+    "main.js": "/information-table/static/js/main.8a721d9b.js",
+    "static/media/Inter-SemiBold.otf": "/information-table/static/media/Inter-SemiBold.3aa40e610d938943736b.otf",
+    "static/media/Inter-Medium.otf": "/information-table/static/media/Inter-Medium.16eda82a3c37a6edda09.otf",
+    "static/media/Inter-Regular.otf": "/information-table/static/media/Inter-Regular.a416f4674fad5f019461.otf",
+    "static/media/Inter-SemiBold.woff": "/information-table/static/media/Inter-SemiBold.cca62d21c8c555c392e5.woff",
+    "static/media/Inter-Medium.woff": "/information-table/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
+    "static/media/Inter-Regular.woff": "/information-table/static/media/Inter-Regular.8c206db99195777c6769.woff",
+    "static/media/Inter-Medium.woff2": "/information-table/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
+    "static/media/Inter-SemiBold.woff2": "/information-table/static/media/Inter-SemiBold.b5f0f109bc88052d4000.woff2",
+    "static/media/Inter-Regular.woff2": "/information-table/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
+    "static/media/search.svg": "/information-table/static/media/search.e2e3d8b324fa4a1dc0f0.svg",
+    "index.html": "/information-table/index.html",
+    "main.74942391.css.map": "/information-table/static/css/main.74942391.css.map",
+    "main.8a721d9b.js.map": "/information-table/static/js/main.8a721d9b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.74942391.css",
+    "static/js/main.8a721d9b.js"
+  ]
+}
