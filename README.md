@@ -1,30 +1,23 @@
-# Информационная таблица
+# Informationstabelle
 
-Целью данного проекта было выполнение тестового задания.
+[Русский](./README.ru.md)
 
-В рамках тестового задания было разработано Web-приложение, принимающее различные массивы объектов,
-и представляющее информацию в виде таблицы. Ключи объектов массива должны были стать заголовками колонок. Таблица должна быть реализована с помощью CSS Grid или CSS Flex.
+Ziel dieses Projekts war die Erledurung einer Testaufgabe.
 
-Помимо этого работающее приложение должно обеспечивать пангинацию и сортировку данных по возрастанию и по убыванию (реализована сортировка по каждой из колонок). Загружаемый контент должен выбираться пользователем.
+Im Rahmen der Testaufgabe wurde eine Webanwendung entwickelt, die verschiedene Arrays von Objekten entgegennimmt und die Informationen in einer Tabelle darstellt. Die Schlüssel der Objekten im Array dienen als Spaltenüberschriften. Die Tabelle sollte mit CSS Grid oder CSS Flex gemacht werden.
 
-На время загрузки контента на весь экран должен выводиться показатель закгрузки.
+Die Anwendung sollte außerdem Paginierung und Sortierung der Daten in aufsteigender und absteigender Reihenfolge unterstützen (Sortierung nach jeder Spalte ist implementiert). Der zu ladende Inhalt sollte vom Benutzer auswählbar sein.
 
-## Использованные тежнологии
+Während des Ladevorgangs sollte ein Ladeindikator im Vollbildmodus angezeigt werden.
 
-Набор технологий определен составителем тестового задания: React JS, TypeScript, SCSS, Axios.
+## Verwendete Technologien
 
-## Доступные скрипты
+Die verwendeten Technologien wurden vom Autor der Testaufgabe festgelegt: React JS, TypeScript, SCSS, Axios.
 
-- `npm start` запуск локального сервера для разработки
+## Verfügbare Skripte
 
-- `npm run build` сборка приложения для его дальнейшего размещения
+- `npm start` startet einen lokalen Entwicklungsserver.
 
-### Планы по доработке
+- `npm run build` erstellt die Anwendung für die Bereitstellung.
 
-Не совсем внимательно читал тестовое задание и упустил, что возможно использование стейт менеджера по собственному выбору. Использование стейт менеджера сделало бы код читабельнее.
-
-Не успел выполнить пункт задания о том, что при наборе слова в поле фильтрации под ним должны выпадать возможные варианты. Необходимо доработать данный момент.
-
-При работе была предпринята попытка реализовать FSD-архитектуру. Однако это реализовано не до конца в части распределения кода по сегментам. Кроме того код в слое app/index.tsx в значительной степени следовало расположить в слое Page.
-
-В работе использованы средства и приемы, которые не совсем положительно оцениваются в сообществе: при построении таблицы использован 'display: contents' (проблема со скринридерами), вместо селекта с целью стилизации использован массим radio-кнопок с элементами label (исключены возможность фокусирования с помощью Tab). Посмотреть, возможны ли другие варианты.
+- `npm run deploy` stellt die Anwendung auf GitHub Pages bereit.
